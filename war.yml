@@ -1,0 +1,12 @@
+---
+- hosts: 172.31.95.33
+  become: yes
+  become_method: sudo
+  remote_user: ubuntu
+  tasks:
+  - name: Copy WAR file to target host
+    copy:
+      src: /home/ubuntu/task/employee.war
+      dest: /opt/tomcat/webapps/employee.war
+  - name: Deploy WAR file to Tomcat
+    shell: /opt/tomcat/bin/startup.sh employee.war
